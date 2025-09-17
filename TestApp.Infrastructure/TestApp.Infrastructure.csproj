@@ -16,8 +16,8 @@
 
     <ItemGroup>
       <Folder Include="Commands\" />
-      <Folder Include="Configurations\" />
       <Folder Include="Migrations\" />
+      <Folder Include="Queries\" />
     </ItemGroup>
 
     <ItemGroup>

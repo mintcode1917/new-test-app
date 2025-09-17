@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TestApp.Infrastructure.Queries.CreateTaskCommand;
+using TestApp.Infrastructure.Commands.CreateTaskCommand;
 
 namespace TestApp.Api.Controllers;
 
@@ -17,21 +17,21 @@ public class TasksController : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetTasks()
-    {
-        var query = new GetAllTasksQuery();
-        var result = await _mediator.Send(query);
-        return Ok(result);
-    }
+    // [HttpGet]
+    // public async Task<IActionResult> GetTasks()
+    // {
+    //     var query = new GetAllTasksQuery();
+    //     var result = await _mediator.Send(query);
+    //     return Ok(result);
+    // }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetTask(int id)
-    {
-        var query = new GetTaskByIdQuery(id);
-        var result = await _mediator.Send(query);
-        return result != null ? Ok(result) : NotFound();
-    }
+    // [HttpGet("{id}")]
+    // public async Task<IActionResult> GetTask(int id)
+    // {
+    //     var query = new GetTaskByIdQuery(id);
+    //     var result = await _mediator.Send(query);
+    //     return result != null ? Ok(result) : NotFound();
+    // }
 
     [HttpPost]
     public async Task<IActionResult> CreateTask(CreateTaskCommand command)
@@ -40,23 +40,23 @@ public class TasksController : ControllerBase
         return CreatedAtAction(nameof(CreateTask), new { id = taskId }, taskId);
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateTask(int id, UpdateTaskCommand command)
-    {
-        if (id != command.Id)
-        {
-            return BadRequest();
-        }
-    
-        await _mediator.Send(command);
-        return NoContent();
-    }
+    // [HttpPut("{id}")]
+    // public async Task<IActionResult> UpdateTask(int id, UpdateTaskCommand command)
+    // {
+    //     if (id != command.Id)
+    //     {
+    //         return BadRequest();
+    //     }
+    //
+    //     await _mediator.Send(command);
+    //     return NoContent();
+    // }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteTask(int id)
-    {
-        var command = new DeleteTaskCommand(id);
-        await _mediator.Send(command);
-        return NoContent();
-    }
+    // [HttpDelete("{id}")]
+    // public async Task<IActionResult> DeleteTask(int id)
+    // {
+    //     var command = new DeleteTaskCommand(id);
+    //     await _mediator.Send(command);
+    //     return NoContent();
+    // }
 }
