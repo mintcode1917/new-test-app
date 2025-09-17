@@ -1,0 +1,11 @@
+services:
+  testapp_db:
+    image: postgres:14
+    restart: always
+    container_name: 'testapp_db'
+    ports:
+      - 5439:5432
+    environment:
+      POSTGRES_USER: developer
+      POSTGRES_PASSWORD: developer
+      POSTGRES_DB: testapp_db
